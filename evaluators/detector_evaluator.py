@@ -4,7 +4,7 @@ By Ali Pesaranghader
 University of Ottawa, Ontario, Canada
 E-mail: apesaran -at- uottawa -dot- ca / alipsgh -at- gmail -dot- com
 """
-
+import numpy as np
 
 class DriftDetectionEvaluator:
     """This class is used to evaluate a drift detection method."""
@@ -18,18 +18,23 @@ class DriftDetectionEvaluator:
         num_located_drift_points = len(located_points)
 
         drift_detection_tp = 0
+
+        exclusion_points = 0
         drift_detection_dl = []
         for located in located_points:
             for actual in actual_points:
                 if actual <= located <= actual + interval:
                     drift_detection_tp += 1
-                    drift_detection_dl.append(located - actual - (actual_drift_points.index(actual) + 1))
+                    drift_detection_dl.append(located - actual)
                     actual_points.remove(actual)
                     break
-        drift_detection_dl = sum(drift_detection_dl) + (num_actual_drifts - len(drift_detection_dl)) * interval
-        drift_detection_dl /= num_actual_drifts
-        drift_detection_fp = num_located_drift_points - drift_detection_tp
-        drift_detection_fn = num_actual_drifts - drift_detection_tp
+        for actual in actual_drift_points:
+            for located in located_points:
+                if actual <= located <= actual + interval:
+                    exclusion_points += 1
 
+        drift_detection_fp = num_located_drift_points-exclusion_points
+        drift_detection_dl = np.mean(drift_detection_dl)
+        drift_detection_fn = num_actual_drifts - drift_detection_tp
         return drift_detection_dl, drift_detection_tp, drift_detection_fp, drift_detection_fn
 

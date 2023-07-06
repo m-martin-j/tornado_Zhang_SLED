@@ -1,0 +1,11 @@
+NB + ADWIN: 
+	Classifier Error-rate: 25.62%,
+	Classifier Average Memory Usage (bytes): 102059.45,
+	Classifier Average Runtime (ms): 49.55,
+	Classifier Total Runtime (ms): 3240.93,
+	Detection Delay: 203.18 TP: 38 FP: -16 FN: 4,
+	Average Detection Memory Usage (bytes): 6055.63,
+	Average Detection Runtime (ms): 12.00,
+	Total Detection Runtime (ms): 1515.56,
+	Drift Points detected: [610, 1091, 1668, 2149, 3654, 4071, 4424, 4809, 5418, 5579, 5996, 6669, 7054, 7471, 8144, 8625, 9074, 9299, 10868, 11509, 11798, 11927, 12280, 14073, 15066, 15675, 17948, 19101, 20030, 20351, 22528, 23169, 23522, 24163, 24516, 24677, 25190, 25607, 25864, 26217, 26890, 27211, 27564, 27981, 28782, 29615, 30288, 30577, 30962, 32851, 33108, 33909, 34422, 35703, 36376, 37881, 40218, 40411, 41436, 42013, 42814, 43135, 44192, 44897, 45026],
+	kappa: 0.4722654269190553

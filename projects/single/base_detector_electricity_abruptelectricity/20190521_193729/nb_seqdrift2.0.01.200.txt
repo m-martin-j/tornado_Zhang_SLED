@@ -1,0 +1,11 @@
+NB + SeqDrift2: 
+	Classifier Error-rate: 27.55%,
+	Classifier Average Memory Usage (bytes): 102455.45,
+	Classifier Average Runtime (ms): 113.25,
+	Classifier Total Runtime (ms): 3457.14,
+	Detection Delay: 486.88 TP: 26 FP: -14 FN: 16,
+	Average Detection Memory Usage (bytes): 10408.00,
+	Average Detection Runtime (ms): 12.96,
+	Total Detection Runtime (ms): 687.87,
+	Drift Points detected: [2314, 3915, 4516, 6117, 8518, 9119, 10120, 10521, 11122, 12323, 15124, 15725, 20526, 22527, 24728, 25329, 26130, 27331, 27732, 28933, 29734, 30335, 31136, 33137, 34138, 34539, 39940, 40341, 43342],
+	kappa: 0.4315991774192946

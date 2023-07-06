@@ -12,7 +12,7 @@ from streams.generators.tools.transition_functions import Transition
 
 class SEA:
 
-    def __init__(self, concept_length=25000, thresholds=[8, 9, 7, 9.5], transition_length=50,
+    def __init__(self, concept_length=5000, thresholds=[8, 9, 7, 9.5], transition_length=0,
                  noise_rate=0.1, random_seed=1):
 
         self.__INSTANCES_NUM = concept_length * len(thresholds)
@@ -45,17 +45,18 @@ class SEA:
             self.__RECORDS.append(list(record))
 
         # [2] TRANSITION
-        for i in range(0, self.__NUM_DRIFTS):
-            transition = []
-            for j in range(0, self.__W):
-                if random.random() < Transition.sigmoid(j, self.__W):
-                    record = self.create_record(self.__THRESHOLDS[i + 1])
-                else:
-                    record = self.create_record(self.__THRESHOLDS[i])
-                transition.append(list(record))
-            starting_index = i * self.__CONCEPT_LENGTH
-            ending_index = starting_index + self.__W
-            self.__RECORDS[starting_index: ending_index] = transition
+        if self.__W > 0:
+            for i in range(0, self.__NUM_DRIFTS):
+                transition = []
+                for j in range(0, self.__W):
+                    if random.random() < Transition.sigmoid(j, self.__W):
+                        record = self.create_record(self.__THRESHOLDS[i + 1])
+                    else:
+                        record = self.create_record(self.__THRESHOLDS[i])
+                    transition.append(list(record))
+                starting_index = i * self.__CONCEPT_LENGTH
+                ending_index = starting_index + self.__W
+                self.__RECORDS[starting_index: ending_index] = transition
 
         # [3] ADDING NOISE
         if len(self.__NOISE_LOCATIONS) != 0:

@@ -8,6 +8,7 @@ E-mail: apesaran -at- uottawa -dot- ca / alipsgh -at- gmail -dot- com
 import math
 
 from dictionary.tornado_dictionary import TornadoDic
+from collections import OrderedDict
 
 
 class PredictionEvaluator:
@@ -127,5 +128,32 @@ class PredictionEvaluator:
         specificity = PredictionEvaluator.calculate_specificity(confusion_matrix, beta)
         return sensitivity + specificity - 1
 
-    # IMPLEMENT COHEN'S + FLEISS' KAPPA
+    @staticmethod
+    def calculate_kappa(confusion_matrix):
+        total = 0
+        p_e = 0
+        correct_predictions = 0
+        true_label = OrderedDict()
+        predicted_label = OrderedDict()
+        for x, y in confusion_matrix.items():
+            true_label[x] = 0
+            predicted_label[x] = 0
+        for k1, v1 in confusion_matrix.items():
+            for k2, v2 in confusion_matrix[k1].items():
+                true_label[k1] += v2
+                predicted_label[k2] += v2
+                total += v2
+                if k2 == k1:
+                    correct_predictions += v2
+
+        for i_1, j_1 in true_label.items():
+            for i_2, j_2 in predicted_label.items():
+                if i_1 == i_2:
+                    p_e += j_1 / total * j_2 / total
+
+        p_0 = correct_predictions / total
+        kappa = (p_0 - p_e) / (1 - p_e)
+        return kappa
+
+
 

@@ -12,15 +12,16 @@ from streams.generators.tools.transition_functions import Transition
 
 class STAGGER:
 
-    def __init__(self, concept_length=33334, transition_length=50, noise_rate=0.1, random_seed=1):
-        self.__NUM_INSTANCES = 3 * concept_length - 2
+    def __init__(self, concept_length=5000, drift_point=None, transition_length=50, noise_rate=0.1, random_seed=1):
+        self.__NUM_INSTANCES = concept_length*(len(drift_point)+1)
         self.__CONCEPT_LENGTH = concept_length
-        self.__NUM_DRIFTS = 2
+        self.__NUM_DRIFTS = len(drift_point)
         self.__SIZE = ['small', 'medium', 'large']
         self.__COLOR = ['red', 'green']
         self.__SHAPE = ['circular', 'non-circular']
         self.__W = transition_length
         self.__RECORDS = []
+        self.drift_point = drift_point
 
         self.__RANDOM_SEED = random_seed
         random.seed(self.__RANDOM_SEED)
@@ -40,20 +41,22 @@ class STAGGER:
 
         # [1] CREATING RECORDS
         for i in range(0, self.__NUM_INSTANCES):
-            context_id = int(i / self.__CONCEPT_LENGTH)
+            context_id = int(i / self.__CONCEPT_LENGTH) % 3
             record = self.create_record(context_id)
             self.__RECORDS.append(list(record))
 
         # [2] TRANSITION
-        for i in range(1, self.__NUM_DRIFTS + 1):
+        inst_count = 0
+        for i in self.drift_point:
+            inst_count += 1
             transition = []
             for j in range(0, self.__W):
                 if random.random() < Transition.sigmoid(j, self.__W):
-                    record = self.create_record(i)
+                    record = self.create_record(i+1)
                 else:
-                    record = self.create_record(i - 1)
+                    record = self.create_record(i)
                 transition.append(list(record))
-            starting_index = i * self.__CONCEPT_LENGTH
+            starting_index = inst_count * self.__CONCEPT_LENGTH
             ending_index = starting_index + self.__W
             self.__RECORDS[starting_index:ending_index] = transition
 

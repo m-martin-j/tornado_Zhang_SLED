@@ -13,11 +13,11 @@ from streams.generators.tools.transition_functions import Transition
 
 class SINE2:
 
-    def __init__(self, concept_length=20000, transition_length=50, noise_rate=0.1, random_seed=1):
+    def __init__(self, concept_length=20000, transition_length=50, num_drifts = 30, noise_rate=0.1, random_seed=1):
 
-        self.__INSTANCES_NUM = 5 * concept_length
+        self.__INSTANCES_NUM = (num_drifts+1) * concept_length
         self.__CONCEPT_LENGTH = concept_length
-        self.__NUM_DRIFTS = 4
+        self.__NUM_DRIFTS = num_drifts
         self.__W = transition_length
         self.__RECORDS = []
 

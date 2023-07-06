@@ -2,3 +2,4 @@ from tasks.prequential import Prequential
 from tasks.prequential_drift import PrequentialDrift
 from tasks.prequential_drift_evaluator import PrequentialDriftEvaluator
 from tasks.prequential_learner_detector_pairs import PrequentialMultiPairs
+from tasks.label_drifts_in_real_world_data_sets import PrequentialDriftEvaluator_real_world

@@ -1,0 +1,11 @@
+NB + PageHinkley: 
+	Classifier Error-rate: 15.03%,
+	Classifier Average Memory Usage (bytes): 167644.80,
+	Classifier Average Runtime (ms): 1227.13,
+	Classifier Total Runtime (ms): 39182.60,
+	Detection Delay: 698.56 TP: 25 FP: 5 FN: 5,
+	Average Detection Memory Usage (bytes): 976.00,
+	Average Detection Runtime (ms): 12.37,
+	Total Detection Runtime (ms): 394.58,
+	Drift Points detected: [5831, 10820, 15800, 20796, 25691, 30844, 35661, 40790, 46026, 50624, 55570, 60622, 65622, 70573, 75808, 81673, 85699, 90634, 95744, 100634, 106062, 110581, 116011, 121695, 125837, 130735, 135603, 140716, 145653, 150576],
+	kappa: 0.8329564495402939

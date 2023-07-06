@@ -158,6 +158,16 @@ class RDDM(SuperDetector):
         self.m_p_min = sys.maxsize
         self.m_s_min = sys.maxsize
         self.m_p_s_min = sys.maxsize
+        self.stored_predictions = [0 for _ in range(self.min_size_stable_concept)]
+        self.num_stored_instances = 0
+        self.first_pos = 0
+        self.last_pos = -1
+        self.last_warn_pos = -1
+        self.last_warn_inst = -1
+        self.inst_num = 0
+        self.rddm_drift = False
+        self.is_change_detected = False
+        self.is_warning_zone = False
 
     def get_settings(self):
         return [str(self.min_num_instance),

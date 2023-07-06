@@ -1,0 +1,11 @@
+NB + CUSUM: 
+	Classifier Error-rate: 12.45%,
+	Classifier Average Memory Usage (bytes): 166644.13,
+	Classifier Average Runtime (ms): 1328.11,
+	Classifier Total Runtime (ms): 42404.43,
+	Detection Delay: 325.60 TP: 30 FP: 1 FN: 0,
+	Average Detection Memory Usage (bytes): 896.00,
+	Average Detection Runtime (ms): 18.21,
+	Total Detection Runtime (ms): 581.17,
+	Drift Points detected: [5334, 10371, 15328, 20322, 25303, 30387, 35283, 40335, 45411, 50297, 55278, 60352, 65292, 70287, 75333, 80505, 85293, 90310, 95303, 100246, 105343, 110225, 115385, 120416, 125373, 130319, 135266, 140327, 145288, 150256, 155411],
+	kappa: 0.8616518741315338

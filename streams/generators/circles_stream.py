@@ -12,8 +12,8 @@ from streams.generators.tools.transition_functions import Transition
 
 class CIRCLES:
 
-    def __init__(self, concept_length=25000, transition_length=500, noise_rate=0.1, random_seed=10):
-        self.__CIRCLES = [[[0.2, 0.5], 0.15], [[0.4, 0.5], 0.2], [[0.6, 0.5], 0.25], [[0.8, 0.5], 0.3]]
+    def __init__(self, concept_length=5000, thresholds = [[[0.2, 0.5], 0.15], [[0.4, 0.5], 0.2], [[0.6, 0.5], 0.25], [[0.8, 0.5], 0.3]], transition_length=0, noise_rate=0.1, random_seed=10):
+        self.__CIRCLES = thresholds
         self.__INSTANCES_NUM = concept_length * len(self.__CIRCLES)
         self.__CONCEPT_LENGTH = concept_length
         self.__NUM_DRIFTS = len(self.__CIRCLES) - 1
@@ -41,19 +41,19 @@ class CIRCLES:
             concept_sec = int(i / self.__CONCEPT_LENGTH)
             record = self.create_record(self.__CIRCLES[concept_sec])
             self.__RECORDS.append(list(record))
-
-        # [2] TRANSITION
-        for i in range(0, self.__NUM_DRIFTS):
-            transition = []
-            for j in range(0, self.__W):
-                if random.random() < Transition.sigmoid(j, self.__W):
-                    record = self.create_record(self.__CIRCLES[i + 1])
-                else:
-                    record = self.create_record(self.__CIRCLES[i])
-                transition.append(list(record))
-            starting_index = i * self.__CONCEPT_LENGTH
-            ending_index = starting_index + self.__W
-            self.__RECORDS[starting_index: ending_index] = transition
+        if self.__W > 0:
+            # [2] TRANSITION
+            for i in range(0, self.__NUM_DRIFTS):
+                transition = []
+                for j in range(0, self.__W):
+                    if random.random() < Transition.sigmoid(j, self.__W):
+                        record = self.create_record(self.__CIRCLES[i + 1])
+                    else:
+                        record = self.create_record(self.__CIRCLES[i])
+                    transition.append(list(record))
+                starting_index = (i+1) * self.__CONCEPT_LENGTH
+                ending_index = starting_index + self.__W
+                self.__RECORDS[starting_index: ending_index] = transition
 
         # [3] ADDING NOISE
         if len(self.__NOISE_LOCATIONS) != 0:

@@ -1,0 +1,11 @@
+NB + RDDM: 
+	Classifier Error-rate: 14.96%,
+	Classifier Average Memory Usage (bytes): 90753.95,
+	Classifier Average Runtime (ms): 1631.74,
+	Classifier Total Runtime (ms): 427259.26,
+	Detection Delay: 70.12 TP: 40 FP: 1 FN: 0,
+	Average Detection Memory Usage (bytes): 32295.61,
+	Average Detection Runtime (ms): 22.83,
+	Total Detection Runtime (ms): 958.78,
+	Drift Points detected: [236, 5070, 10062, 15059, 20058, 25051, 30041, 35032, 40068, 45118, 50082, 55029, 60059, 65059, 70063, 75056, 80042, 85048, 90042, 95068, 100051, 105115, 110044, 115074, 120071, 125115, 130052, 135039, 140044, 145290, 150141, 155051, 160051, 165044, 170039, 175072, 180200, 185082, 190050, 195032, 200041],
+	kappa: 0.8337951088311124

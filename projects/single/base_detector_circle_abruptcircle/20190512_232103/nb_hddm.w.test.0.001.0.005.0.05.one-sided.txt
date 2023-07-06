@@ -1,0 +1,11 @@
+NB + HDDM.W.test: 
+	Classifier Error-rate: 14.15%,
+	Classifier Average Memory Usage (bytes): 32413.33,
+	Classifier Average Runtime (ms): 181.00,
+	Classifier Total Runtime (ms): 5556.04,
+	Detection Delay: 110.20 TP: 30 FP: 0 FN: 0,
+	Average Detection Memory Usage (bytes): 2472.00,
+	Average Detection Runtime (ms): 68.81,
+	Total Detection Runtime (ms): 2101.84,
+	Drift Points detected: [5076, 10053, 15091, 20061, 25175, 30211, 35033, 40049, 45180, 50139, 55108, 60039, 65115, 70134, 75084, 80027, 85144, 90316, 95098, 100046, 105184, 110070, 115374, 120046, 125059, 130076, 135172, 140040, 145030, 150076],
+	kappa: 0.7170904170474166

@@ -40,7 +40,7 @@ class PrequentialDriftEvaluator:
         self.__actual_drift_points = actual_drift_points
         self.__drift_acceptance_interval = drift_acceptance_interval
 
-        self.__located_drift_points = []
+        self.located_drift_points = []
         self.__drift_points_boolean = []
         self.__drift_detection_memory_usage = []
         self.__drift_detection_runtime = []
@@ -100,7 +100,7 @@ class PrequentialDriftEvaluator:
                 warning_status, drift_status = self.drift_detector.detect(prediction_status)
                 if drift_status:
                     self.__drift_points_boolean.append(1)
-                    self.__located_drift_points.append(self.__instance_counter)
+                    self.located_drift_points.append(self.__instance_counter)
                     print("\n ->>> " + self.learner.LEARNER_NAME.title() + " faced a drift at instance " +
                           str(self.__instance_counter) + ".")
                     print("%0.2f" % percentage, " of instances are prequentially processed!", end="\r")
@@ -144,12 +144,11 @@ class PrequentialDriftEvaluator:
             self.__drift_points_boolean.append(0)
 
         print("\n" + "The stream is completely processed.")
-        self.__store_stats()
-        self.__plot()
         print("\n\r" + "THE END!")
         print("\a")
+        return self.store_stats()
 
-    def __store_stats(self):
+    def store_stats(self):
 
         learner_name = TornadoDic.get_short_names(self.learner.LEARNER_NAME)
         detector_name = self.drift_detector.DETECTOR_NAME
@@ -159,11 +158,12 @@ class PrequentialDriftEvaluator:
         st_wr = open(self.__project_path + file_name.lower() + ".txt", "w")
 
         lrn_error_rate = PredictionEvaluator.calculate_error_rate(self.learner.get_global_confusion_matrix())
-        dl, tp, fp, fn = DriftDetectionEvaluator.calculate_dl_tp_fp_fn(self.__located_drift_points,
+        kappa = PredictionEvaluator.calculate_kappa(self.learner.get_global_confusion_matrix())
+        dl, tp, fp, fn = DriftDetectionEvaluator.calculate_dl_tp_fp_fn(self.located_drift_points,
                                                                        self.__actual_drift_points,
                                                                        self.__drift_acceptance_interval)
 
-        if len(self.__located_drift_points) != 0:
+        if len(self.located_drift_points) != 0:
             # learner stats
             lrn_mem = numpy.mean(self.__learner_memory_usage)
             lrn_ave_runtime = numpy.mean(self.__learner_runtime)
@@ -189,11 +189,15 @@ class PrequentialDriftEvaluator:
                 "Average Detection Memory Usage (bytes): " + "%0.2f" % ddm_mem + "," + "\n\t" + \
                 "Average Detection Runtime (ms): " + "%0.2f" % ddm_avg_runtime + "," + "\n\t" + \
                 "Total Detection Runtime (ms): " + "%0.2f" % ddm_total_runtime + "," + "\n\t" + \
-                "Drift Points detected: " + str(self.__located_drift_points)
+                "Drift Points detected: " + str(self.located_drift_points)+ "," + "\n\t" + \
+                f"kappa: {kappa}"
+
+        result = [lrn_error_rate*100, dl, tp, fp, ddm_mem, ddm_total_runtime,kappa]
 
         print(stats)
         st_wr.write(stats)
         st_wr.close()
+        return result
 
     def __plot(self):
 

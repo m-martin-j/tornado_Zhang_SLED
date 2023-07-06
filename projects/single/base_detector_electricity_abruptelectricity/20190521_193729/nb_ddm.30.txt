@@ -1,0 +1,11 @@
+NB + DDM: 
+	Classifier Error-rate: 33.48%,
+	Classifier Average Memory Usage (bytes): 104264.00,
+	Classifier Average Runtime (ms): 3107.79,
+	Classifier Total Runtime (ms): 3107.79,
+	Detection Delay: nan TP: 0 FP: 0 FN: 42,
+	Average Detection Memory Usage (bytes): 920.00,
+	Average Detection Runtime (ms): 296.36,
+	Total Detection Runtime (ms): 296.36,
+	Drift Points detected: [],
+	kappa: 0.3043921117036486
